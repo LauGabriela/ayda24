@@ -1,33 +1,66 @@
 #!/usr/bin/env python3
 
 # Programa para convertir un número entero en su descripcion con letra
-# Con su valor en $ pesos, como un cheque.  
+# Con su valor en $ pesos, como un cheque.
+
 
 def unidades(n):
     """
-       Funcion que convierte las unidades del 0 (cero) al 9 (nueve)
-       a letras.
+    Funcion que convierte las unidades del 0 (cero) al 9 (nueve)
+    a letras.
     """
-    unidades = ["cero", "uno", "dos", "tres", "cuatro", "cinco",
-               "seis", "siete", "ocho", "nueve"]
+    unidades = [
+        "cero",
+        "uno",
+        "dos",
+        "tres",
+        "cuatro",
+        "cinco",
+        "seis",
+        "siete",
+        "ocho",
+        "nueve",
+    ]
     return unidades[n]
+
 
 def especiales(n):
     """
-       Funcion que convierte los números del 10 (diez) al 19(diecinueve)
-       a letras.
+    Funcion que convierte los números del 10 (diez) al 19(diecinueve)
+    a letras.
     """
-    especiales = ["diez", "once", "doce", "trece", "catorce",
-                  "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve"]
+    especiales = [
+        "diez",
+        "once",
+        "doce",
+        "trece",
+        "catorce",
+        "quince",
+        "dieciséis",
+        "diecisiete",
+        "dieciocho",
+        "diecinueve",
+    ]
     return especiales[n - 10]
+
 
 def decenas(n):
     """
-       Funcion que convierte las decenas del 20(veinte) al 90(noventa)
-       a letras y para los numeros del 21(veintiuno) al 29(veintinueve).
+    Funcion que convierte las decenas del 20(veinte) al 90(noventa)
+    a letras y para los numeros del 21(veintiuno) al 29(veintinueve).
     """
-    decenas = ["", "", "veinte", "treinta", "cuarenta", "cincuenta",
-               "sesenta", "setenta", "ochenta", "noventa"]
+    decenas = [
+        "",
+        "",
+        "veinte",
+        "treinta",
+        "cuarenta",
+        "cincuenta",
+        "sesenta",
+        "setenta",
+        "ochenta",
+        "noventa",
+    ]
     if n < 10:
         return unidades(n)
     elif 10 <= n < 20:
@@ -46,14 +79,24 @@ def decenas(n):
         else:
             return decenas[n // 10]
 
+
 def centenas_func(n):
     """
-       Funcion que convierte las centenas del 100(cien) al 900(novecientos)
-       a letras.
+    Funcion que convierte las centenas del 100(cien) al 900(novecientos)
+    a letras.
     """
-    centenas_list = ["", "ciento", "doscientos", "trescientos", "cuatrocientos",
-                   "quinientos", "seiscientos", "setecientos", "ochocientos",
-                   "novecientos"]
+    centenas_list = [
+        "",
+        "ciento",
+        "doscientos",
+        "trescientos",
+        "cuatrocientos",
+        "quinientos",
+        "seiscientos",
+        "setecientos",
+        "ochocientos",
+        "novecientos",
+    ]
     if n == 0:
         return ""
     elif n == 100:
@@ -68,9 +111,10 @@ def centenas_func(n):
         else:
             return cent
 
+
 def millares_func(n):
     """
-       Funcion que regresa n < 1000 a letras.
+    Funcion que regresa n < 1000 a letras.
     """
     if n == 0:
         return ""
@@ -79,21 +123,22 @@ def millares_func(n):
     else:
         return centenas_func(n)
 
+
 def numero_a_letras(n):
     """Convierte un número entero a letras."""
     if n == 0:
         return "cero pesos"
     else:
         partes = []
-        
+
         # se muestran las cantidades de mil a billones
         secciones = [
             (10**12, "billón", "billones"),
             (10**9, "mil millones", "mil millones"),
             (10**6, "millón", "millones"),
-            (10**3, "mil", "mil")
+            (10**3, "mil", "mil"),
         ]
-        
+
         for divisor, singular, plural in secciones:
             cantidad = n // divisor
             if cantidad > 0:
@@ -109,12 +154,13 @@ def numero_a_letras(n):
                     else:
                         partes.append(f"{millares_func(cantidad)} {plural}")
                 n %= divisor
-        
+
         if n > 0:
             partes.append(millares_func(n))
-        
-        letras = ' '.join(partes)
+
+        letras = " ".join(partes)
         return f"{letras} pesos"
+
 
 def main():
     """Función principal del programa."""
@@ -126,6 +172,7 @@ def main():
         print(f"El importe en letra es: {letras}")
     except ValueError:
         print("Por favor, ingrese la cantidad correcta.")
+
 
 if __name__ == "__main__":
     main()
